@@ -69,28 +69,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/Underline"
-            android:text="To Meter" />
+            android:text="B1" />
 
         <RadioButton
             android:id="@+id/radioButtonFeet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/Underline"
-            android:text="To Feet" />
+            android:text="B2" />
 
         <RadioButton
             android:id="@+id/radioButtonToMile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/Underline"
-            android:text="To Mile" />
+            android:text="B3" />
 
         <RadioButton
             android:id="@+id/radioButtonClearAll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/Underline"
-            android:text="Clear All" />
+            android:text="B14" />
 
     </RadioGroup>
 

@@ -4,7 +4,7 @@
     <string name="hint"> Enter Distance</string>
     <string name="result"> Results</string>
 
-    <string name="meter"> To Meter</string>
+    <string name="meter"> To Meters </string>
     <string name="feet"> To Feet</string>
     <string name="mile"> To Miles</string>
     <string name="clear"> Clear All</string>

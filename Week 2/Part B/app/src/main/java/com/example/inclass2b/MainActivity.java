@@ -61,8 +61,14 @@ public class MainActivity extends AppCompatActivity {
                         try{
                             double inputRes = Double.parseDouble(inputNumber.getText().toString());
                             double finalOutput = inputRes * 0.0254;
-                            Log.d("Result",finalOutput + "");
-                            resultOutput.setText(String.format("%.4f", finalOutput) + " Meters");
+                            if(finalOutput>=1){
+                                Log.d("Result",finalOutput + "");
+                                resultOutput.setText(String.format("%.1f", finalOutput) + " Meters");
+                            } else{
+                                Log.d("Result",finalOutput + "");
+                                resultOutput.setText(String.format("%.4f", finalOutput) + " Meters");
+                            }
+
 
                         } catch (Exception e){
                             Toast.makeText(MainActivity.this,"Invalid Input",Toast.LENGTH_LONG).show();
@@ -77,8 +83,13 @@ public class MainActivity extends AppCompatActivity {
                         try{
                             double inputRes = Double.parseDouble(inputNumber.getText().toString());
                             double finalOutput = inputRes * 1 / 12;
-                            Log.d("Result",finalOutput + "");
-                            resultOutput.setText(String.format("%.5f", finalOutput) + " Feet");
+                            if(finalOutput>=1){
+                                Log.d("Result",finalOutput + "");
+                                resultOutput.setText(String.format("%.1f", finalOutput) + " Feet");
+                            } else{
+                                Log.d("Result",finalOutput + "");
+                                resultOutput.setText(String.format("%.4f", finalOutput) + " Feet");
+                            }
 
                         } catch (Exception e){
                             Toast.makeText(MainActivity.this,"Invalid Input",Toast.LENGTH_LONG).show();
@@ -94,8 +105,13 @@ public class MainActivity extends AppCompatActivity {
                         try{
                             double inputRes = Double.parseDouble(inputNumber.getText().toString());
                             double finalOutput = inputRes * 1 / 63360;
-                            Log.d("Result",finalOutput + "");
-                            resultOutput.setText(String.format("%.9f", finalOutput) + " Miles");
+                            if(finalOutput>=1){
+                                Log.d("Result",finalOutput + "");
+                                resultOutput.setText(String.format("%.1f", finalOutput) + " Miles");
+                            } else{
+                                Log.d("Result",finalOutput + "");
+                                resultOutput.setText(String.format("%.9f", finalOutput) + " Miles");
+                            }
 
                         } catch (Exception e){
                             Toast.makeText(MainActivity.this,"Invalid Input",Toast.LENGTH_LONG).show();
