@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">HomeWork01</string>
+    <string name="billTotal">Bill Total</string>
+    <string name="inputBillNumber">Enter Bill Value </string>
+    <string name="tipText">Tip %: </string>
+    <string name="tipTextValue">Tip : </string>
+
+
+    <string name="tenPercent"> 10% </string>
+    <string name="fifteenPercent"> 15% </string>
+    <string name="eighteenPercent"> 18% </string>
+    <string name="custom"> Custom </string>
+    <string name="total"> Total :  </string>
+    <string name="exit"> Exit </string>
+
+    <string name="missingInput"> Please throw me some numbers !  </string>
+
+
+    <string name="USD"> $ </string>
+
+
+</resources>
