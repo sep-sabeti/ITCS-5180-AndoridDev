@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateTask">
+
+    <TextView
+        android:id="@id/lblCreateName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/label_name"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtCreateTaskName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:ems="10"
+        android:hint="@string/taskNameHint"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lblCreateName"
+        android:backgroundTint="@color/purple_500"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblCreateDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/label_date"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lblCreateName"
+        app:layout_constraintTop_toBottomOf="@+id/lblCreateName" />
+
+    <Button
+        android:id="@+id/btnSetDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/btn_set_date"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/buttonGrey"
+        app:layout_constraintEnd_toEndOf="@+id/txtCreateTaskName"
+        app:layout_constraintTop_toBottomOf="@+id/txtCreateTaskName" />
+
+    <TextView
+        android:id="@+id/lblCreatePriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/label_priority"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lblCreateDate"
+        app:layout_constraintTop_toBottomOf="@+id/lblCreateDate" />
+
+    <RadioGroup
+        android:id="@+id/grpPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/lblCreatePriority"
+        app:layout_constraintTop_toBottomOf="@+id/lblCreatePriority">
+
+        <RadioButton
+            android:id="@+id/radHigh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/purple_500"
+            android:text="@string/high" />
+
+        <RadioButton
+            android:id="@+id/radMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/purple_500"
+            android:text="@string/medium" />
+
+        <RadioButton
+            android:id="@+id/radLow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/purple_500"
+
+            android:text="@string/low" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnCreateCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/button_cancel"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/buttonGrey"
+        app:layout_constraintStart_toStartOf="@+id/lblCreatePriority"
+        app:layout_constraintTop_toBottomOf="@+id/grpPriority" />
+
+    <Button
+        android:id="@+id/btnCreateSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/button_submit"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/buttonGrey"
+        app:layout_constraintEnd_toEndOf="@+id/btnSetDate"
+        app:layout_constraintTop_toBottomOf="@+id/grpPriority" />
+
+    <TextView
+        android:id="@+id/dateShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/lblCreateDate"
+        app:layout_constraintStart_toStartOf="@+id/txtCreateTaskName"
+        app:layout_constraintTop_toTopOf="@+id/lblCreateDate" />
+</androidx.constraintlayout.widget.ConstraintLayout>

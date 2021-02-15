@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/lblNumberTasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/numbertasks"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblUpcoming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/upcoming"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblNumberTasks" />
+
+    <Button
+        android:id="@+id/btnViewTasks"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/viewtasks"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/buttonGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/lblNumberTasks"
+        app:layout_constraintTop_toBottomOf="@+id/lblUpcoming" />
+
+    <Button
+        android:id="@+id/btnCreateTask"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/createtasks"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/buttonGrey"
+        app:layout_constraintEnd_toEndOf="@+id/btnViewTasks"
+        app:layout_constraintStart_toStartOf="@+id/btnViewTasks"
+        app:layout_constraintTop_toBottomOf="@+id/btnViewTasks" />
+
+    <TextView
+        android:id="@+id/lblDisplayTasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/lblNumberTasks"
+        app:layout_constraintTop_toTopOf="@+id/lblNumberTasks" />
+
+    <TextView
+        android:id="@+id/taskNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/lblNumberTasks"
+        app:layout_constraintStart_toEndOf="@+id/lblNumberTasks"
+        app:layout_constraintTop_toTopOf="@+id/lblNumberTasks" />
+
+    <TextView
+        android:id="@+id/task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/task"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/taskNumber"
+        app:layout_constraintStart_toEndOf="@+id/taskNumber"
+        app:layout_constraintTop_toTopOf="@+id/taskNumber" />
+
+    <TextView
+        android:id="@+id/taskName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/lblUpcoming"
+        app:layout_constraintTop_toBottomOf="@+id/lblUpcoming" />
+
+    <TextView
+        android:id="@+id/taskDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@+id/taskName"
+        app:layout_constraintTop_toBottomOf="@+id/taskName" />
+
+    <TextView
+        android:id="@+id/taskPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/taskDate"
+        app:layout_constraintEnd_toEndOf="@+id/btnViewTasks" />
+</androidx.constraintlayout.widget.ConstraintLayout>
