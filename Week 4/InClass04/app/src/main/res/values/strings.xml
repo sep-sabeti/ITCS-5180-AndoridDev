@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">InClass04</string>
+    <string name="login">Login</string>
+    <string name="emailHint">Email</string>
+    <string name="passwordHint">Password</string>
+    <string name="nameHint">Name</string>
+    <string name="submit">Submit</string>
+    <string name="createNewAccount">Create New Account</string>
+    <string name="cancel">Cancel</string>
+    <string name="wlcome">Welcome</string>
+    <string name="editProfile">Edit Profile</string>
+    <string name="logOut">Log Out</string>
+    <string name="Toast_missingInput">Please make sure your inputs are there and they are correct</string>
+    <string name="Toast_successful">You successfully logged in</string>
+    <string name="Toast_crateAccount">You should first create an account</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="sure"> Are you sure you want to create an account?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="account">Account</string>
+    <string name="wrong">Something went wrong</string>
+    <string name="Toast_failAccount">Failed To Create Account</string>
+    <string name="inputWrong"> Make sure the input is in correct format</string>
+    <string name="updateAccount">Update Account</string>
+    <string name="updateedAccountToast">You updated the account succesfully</string>
+    <string name="sure_update"> Are you sure you want to cancel ?</string>
+    <string name="cancelTransaction"> You cancelled your transaction</string>
+    <string name="register"> Register</string>
+    <string name="registerSuccess"> You registered your account successfully</string>
+    <string name="loggOut"> You logged out of your account successfully</string>
+    <string name="changeEmail"> Change your email, it has been already declared</string>
+
+</resources>

@@ -1,12 +1,13 @@
-package com.example.inclass04;
+package com.example.myapplication;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.HashMap;
 
 public class DataServices {
     private static HashMap<String, Account> accounts = new HashMap<String, Account>(){{
         put("a@a.com", new Account("Alice Smith", "a@a.com", "test123"));
-        put("b@b.com", new Account("Bob Smith", "b@b.com", "test123"));
-        put("c@c.com", new Account("Charles Smith", "c@c.com", "test123"));
     }};
 
     public static Account login(String email, String password){
@@ -81,7 +82,7 @@ public class DataServices {
         return account;
     }
 
-    public static class Account {
+    public static class Account implements Serializable {
         private String name, email, password;
         public Account(String name, String email, String password) {
             this.name = name;
