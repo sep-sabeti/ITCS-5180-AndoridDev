@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">InClass05</string>
+    <string name="login">Login</string>
+    <string name="emailHint">Email</string>
+    <string name="passHint">Password</string>
+    <string name="createNewAccount">Create New Account</string>
+    <string name="nameHint">Name</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="registerAccount">Register Account</string>
+    <string name="genres">Genres</string>
+    <string name="welcome">Welcome</string>
+    <string name="topFreeApps">Top Free Apps: </string>
+    <string name="logOut">Log Out </string>
+    <string name="appCategories">App Categories </string>
+    <string name="confirmation">Confirmation </string>
+    <string name="confirmationMessage"> Are you sure you want to log out of the application ? </string>
+    <string name="yes"> Yes </string>
+    <string name="no"> No </string>
+    <string name="appDetails"> App Details </string>
+    <string name="topPaidApps"> Top Paid Apps </string>
+    <string name="register">Register</string>
+
+    //Toast Messages
+    <string name="Toast_emailInputWrong">Please type in your email</string>
+    <string name="Toast_passWordWrong">Please type in your password</string>
+    <string name="Toast_notRegisteredUser">Please register first</string>
+    <string name="Toast_loggedInSuccessfully">You logged in successfully</string>
+    <string name="Toast_notRetrieveAccount">Cannot retrieve the account info, something went wrong</string>
+    <string name="Toast_notRetrieveAppCategories">Cannot retrieve the app info, something went wrong</string>
+    <string name="Toast_loggedOutSuccessfully">You logged out of the app successfully</string>
+    <string name="Toast_credentialIncorrect">Your credentials are not correct</string>
+    <string name="Toast_inputPassword">Please enter a password</string>
+    <string name="Toast_inputEmail">Please enter a email</string>
+    <string name="Toast_inputName">Please enter your name</string>
+    <string name="Toast_wentWrong">Something went wrong</string>
+    <string name="Toast_successfulCreation">You created your account successfully</string>
+    <string name="Toast_canceledTransaction">You canceled creating the account</string>
+
+</resources>
