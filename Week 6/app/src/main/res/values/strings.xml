@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">InClass06</string>
+    <string name="thread">Generate using Thread</string>
+    <string name="async">Generate using AsyncTask</string>
+    <string name="complexity">Select Complexity</string>
+    <string name="time">Times</string>
+    <string name="average">Average</string>
+    <string name="Toast_Start">We are starting the activity</string>
+    <string name="Toast_Finish">Activity finished</string>
+    <string name="Toast_Fail">This activity cannot be done! Choose another complexity</string>
+
+</resources>

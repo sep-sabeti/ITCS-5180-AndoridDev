@@ -34,7 +34,7 @@ public class Login extends Fragment {
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
-    }
+}
 
     public Login() {
         // Required empty public constructor
