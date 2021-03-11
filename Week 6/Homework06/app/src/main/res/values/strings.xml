@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Homework06</string>
+    <string name="emailHint">Email</string>
+    <string name="passwordHint">Password</string>
+    <string name="login">Login</string>
+    <string name="createNewAccount">Create New Account</string>
+    <string name="nameHint">Name</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="appCategories">App Categories</string>
+    <string name="welcome">Welcome</string>
+    <string name="logout">Log Out</string>
+    <string name="genres">Genres</string>
+    <string name="register">Register Account</string>
+    <string name="confrimation">Confirmation</string>
+    <string name="confrimation_Message">Are you sure you want to cancel ? </string>
+    <string name="confrimation_Message2">Are you sure you want to log out ? </string>
+    <string name="yes">Yes </string>
+    <string name="no">No</string>
+    <string name="topPaidApps">Top Paid Apps</string>
+    <string name="appDetails">App Details</string>
+    <string name="pleaseWait"> Please wait !!</string>
+
+    //Toasts
+    <string name="Toast_loginAttempt">You clicked on login button</string>
+    <string name="Toast_login">You are logged in</string>
+    <string name="Toast_missingEmail">Please enter your email</string>
+    <string name="Toast_missingPassword">Please enter your password</string>
+    <string name="Toast_wrongCredentials">Cannot login with the entered credentials</string>
+    <string name="Toast_waitForRegistery">Please wait until we try to register your account</string>
+    <string name="Toast_registered">Your account is successfully registered</string>
+    <string name="Toast_missingName">Please enter your name</string>
+    <string name="Toast_emailWrongPattern">Please enter a valid email</string>
+    <string name="Toast_logout">You successfully logged out of your account</string>
+    <string name="Toast_wait">Please wait until we finish your task !</string>
+    <string name="Toast_done">Your task is done ! You can go ahead now !</string>
+    <string name="Toast_wrong">Something went wrong !</string>
+
+</resources>

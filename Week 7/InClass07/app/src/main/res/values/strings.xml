@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">InClass07</string>
+    <string name="addNewContact"> New Contact</string>
+    <string name="delete">Delete</string>
+    <string name="nameHint">Name</string>
+    <string name="emailHint">Email</string>
+    <string name="numberHint"> Phone Number</string>
+    <string name="numberBaseHint">Home or Cell or Office?</string>
+    <string name="contactDetail">Contact Detail</string>
+    <string name="contactList">Contact List</string>
+    <string name="newContact">New Contact</string>
+    <string name="update">Update your contact</string>
+    <string name="submit">Submit</string>
+    <string name="updateContact">Update Contact</string>
+    //Toasts
+    <string name="Toast_welcome"> Welcome !</string>
+    <string name="Toast_someThingWentWrong"> Please check out your internet connection !!</string>
+    <string name="Toast_successfulUpdate"> You updated your account successfully</string>
+    <string name="Toast_successfulDelete"> You deleted your account successfully</string>
+    <string name="Toast_successfulCreate"> You created your new account successfully</string>
+    <string name="Toast_missingName"> Please enter your name</string>
+    <string name="Toast_missingEmail">Please enter your email</string>
+    <string name="Toast_wrongEmail">Please enter a valid email</string>
+    <string name="Toast_missingNumber"> Please enter your number</string>
+    <string name="Toast_missingType"> Please enter the type of your number</string>
+</resources>
