@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">HW05</string>
+    <string name="cities_label">Cities</string>
+
+    <string name="current_weather_label">Current Weather</string>
+    <string name="temp">Temperature</string>
+    <string name="temp_max">Temperature Max</string>
+    <string name="temp_min">Temperature Min</string>
+    <string name="description">Description</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="wind_degree">Wind Degree</string>
+    <string name="cloudiness">Cloudiness</string>
+    <string name="max">Max</string>
+    <string name="min">Min</string>
+    <string name="check_forecast">Check Forecast</string>
+    <string name="percent">%</string>
+    <string name="f">F</string>
+    <string name="mph">MPH</string>
+    <string name="degree">Degrees</string>
+    <string name="weather_forecast">Weather Forecast</string>
+
+</resources>

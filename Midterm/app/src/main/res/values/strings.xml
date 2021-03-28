@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Midterm</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="createNewAccount">Create New Account</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="logout">Logout</string>
+    <string name="newForum">New Forum</string>
+    <string name="forum">Forum</string>
+    <string name="forums">Forums</string>
+    <string name="comments">Comments</string>
+
+    <string name="forumTitle">Forum Title</string>
+    <string name="forumDescription">Forum Description</string>
+    <string name="post">Post</string>
+    <string name="writeComment">Write Comment</string>
+    <string name="like">Likes</string>
+<string name="confirmation">Confirmation</string>
+    <string name="yes">Yes</string>
+<string name="no">No</string>
+    <string name="sure">Are you sure you want to logout?</string>
+    //Toasts
+
+    <string name="missingEmail">Please enter your email</string>
+    <string name="missingPassword">Please enter your password</string>
+    <string name="someThingWentWrong">Something went wrong, please try again</string>
+    <string name="wait">Please wait !!!</string>
+    <string name="missingText">Please enter some comment</string>
+<string name="loggedOuyt">You logged out successfully</string>
+    <string name="missingName">Please enter your name</string>
+    <string name="emailValidemail">Please enter a valid email</string>
+    <string name="missingForumName">Please enter a name for your forum</string>
+    <string name="missingForumDescription">Please enter some description for your forum</string>
+
+</resources>
