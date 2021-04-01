@@ -36,50 +36,33 @@ import java.util.Locale;
 
 import static android.provider.Settings.NameValueTable.VALUE;
 
-public class Forums extends Fragment {
+public class Forums extends Fragment implements Adapter.ICardHolderListener {
 
 
     private static final String NAME = "name";
-
     private String name;
     public ArrayList<Forum> forums = new ArrayList<>();
     public FirebaseAuth mAuth;
     IForumsListner mListner;
-
-    public static Forums newInstance(String param1) {
-        Forums fragment = new Forums();
-        Bundle args = new Bundle();
-        args.putString(NAME, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public Forums() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            name = getArguments().getString(NAME);
-        }
-    }
+    Forums ctx;
+    Adapter adapter;
+    RecyclerView recyclerView;
+    FirebaseFirestore db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_forums, container, false);
-
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         getActivity().setTitle(R.string.forums);
         Log.d("hey2", "onCreateView: " + name);
         Button logOut = view.findViewById(R.id.logout);
         Button newForum = view.findViewById(R.id.newForumButton);
-        final RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        recyclerView = view.findViewById(R.id.recyclerView);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
-
 
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,53 +80,11 @@ public class Forums extends Fragment {
             }
         });
 
-
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("Forums")
-                .get()
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                        if(task.isSuccessful()){
-                            for (QueryDocumentSnapshot forum: task.getResult()
-                            ) {
-                                try{
-                                    Forum forum1 = new Forum(forum.getData().get("Name").toString(),forum.getData().get("Owner").toString(),forum.getData().get("Description").toString(),forum.getId(),forum.getData().get("Owner Email").toString(), getDate(forum.getTimestamp("Date").getSeconds()));
-                                    Log.d("TAG", "onComplete: "+forum1.toString());
-                                    forums.add(forum1);
-                                }
-                                catch (NullPointerException e){
-
-                                }
-                            }
-                        }
-                    }
-                });
-        final Adapter adapter = new Adapter(forums);
+        ctx = this;
+        adapter = new Adapter(forums ,  ctx);
         recyclerView.setAdapter(adapter);
-
-        db.collection("Forums")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        forums.clear();
-                        for (QueryDocumentSnapshot forum: value
-                        ) {
-                                try{
-                                    Forum forum1 = new Forum(forum.getData().get("Name").toString(),forum.getData().get("Owner").toString(),forum.getData().get("Description").toString(), forum.getId() ,forum.getData().get("Owner Email").toString(),getDate(forum.getTimestamp("Date").getSeconds()));
-                                    forums.add(forum1);
-                                    adapter.notifyDataSetChanged();
-
-                                } catch (NullPointerException e){
-
-                                }
-                        }
-                    }
-                });
-
+        getUsers();
+        getData();
 
         return view;
     }
@@ -163,9 +104,62 @@ public class Forums extends Fragment {
         }
     }
 
+    @Override
+    public void deleteClicked(final Forum forum) {
+
+        Log.d("TAG", "deleteClicked: "+forum);
+        db.collection("Forums").document(forum.getId()).delete();
+
+    }
+
+
+
     public interface IForumsListner{
         void logOutClicked(boolean status);
         void newForomClicked(boolean status);
+    }
+
+
+    public void getData(){
+        db.collection("Forums")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        forums.clear();
+                        for (QueryDocumentSnapshot forum: value
+                        ) {
+                            try{
+                                Forum forum1 = new Forum(forum.getData().get("Title ").toString(),forum.getData().get("Owner").toString(),forum.getData().get("Description").toString(), forum.getId() ,forum.getData().get("Owner Email").toString(),getDate(forum.getTimestamp("Date").getSeconds()));
+                                forums.add(forum1);
+                            } catch (NullPointerException e){
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+    }
+
+
+
+    public void getUsers(){
+        db.collection("Users")
+                .get()
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for (QueryDocumentSnapshot document:task.getResult()
+                            ) {
+                                String documentEmail = document.getData().get("Email").toString();
+                                String documentName = document.getData().get("Name").toString();
+                                if(documentEmail.equals(mAuth.getCurrentUser().getEmail())){
+                                    name = documentName;
+                                }
+                            }
+                        }
+                    }
+                });
+
     }
 
 

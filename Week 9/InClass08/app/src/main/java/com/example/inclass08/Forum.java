@@ -1,11 +1,13 @@
 package com.example.inclass08;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Forum {
 
     String title,owner,description , id , ownerEmail , date;
+    ArrayList<String> liked;
 
     public Forum(){
 
@@ -18,6 +20,7 @@ public class Forum {
         this.id = id;
         this.ownerEmail = ownerEmail;
         this.date = date;
+        this.liked = new ArrayList<>();
     }
 
     public String getOwnerEmail() {

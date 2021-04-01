@@ -22,5 +22,6 @@
     <string name="validEmail">Please Enter a Valid Email</string>
     <string name="emptyTitle">Please enter a title</string>
     <string name="emptyDes">Please enter some description</string>
+    <string name="success">You successfully registered your account</string>
 
 </resources>

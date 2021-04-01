@@ -18,10 +18,10 @@ public class MainActivity extends AppCompatActivity implements Login.ILoginListe
         setContentView(R.layout.activity_main);
 
 
-        setTitle(R.string.login);
 
-        if(FirebaseAuth.getInstance().getUid() == null ){
-                getSupportFragmentManager().beginTransaction()
+        if(FirebaseAuth.getInstance().getUid() ==  null || FirebaseAuth.getInstance().getCurrentUser() == null){
+            setTitle(R.string.login);
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.container,new Login())
                     .commit();
         } else {
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements Login.ILoginListe
     @Override
     public void createdAccountStatus(boolean status) {
         if(status){
+            setTitle(R.string.forums);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container,new Forums())
                     .addToBackStack(null)
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements Login.ILoginListe
     @Override
     public void logOutClicked(boolean status) {
         if(status){
+            setTitle(R.string.login);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container,new Login())
                     .commit();
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements Login.ILoginListe
     @Override
     public void newForumSubmit(boolean status) {
         if(status){
+            setTitle(R.string.forums);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container,new Forums())
                     .commit();
@@ -112,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements Login.ILoginListe
     public void cancelForumClicked(boolean status) {
         if(status){
             if(status){
+                setTitle(R.string.forums);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container,new Forums())
                         .commit();

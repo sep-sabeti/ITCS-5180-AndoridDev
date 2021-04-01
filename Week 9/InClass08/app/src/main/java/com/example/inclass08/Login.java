@@ -18,12 +18,14 @@ import com.google.android.gms.tasks.RuntimeExecutionException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class Login extends Fragment {
     
     ILoginListener mListener;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
 
     @Override
@@ -40,6 +42,7 @@ public class Login extends Fragment {
         
         login = view.findViewById(R.id.loginButton);
         create = view.findViewById(R.id.newAccountButton);
+        getActivity().setTitle(R.string.login);
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +59,7 @@ public class Login extends Fragment {
                 String passInput = pass.getText().toString();
                 
                 mAuth = FirebaseAuth.getInstance();
+                db = FirebaseFirestore.getInstance();
                 
                 if(!emailInput.equals("")){
                     if(!passInput.equals("")){

@@ -17,7 +17,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,6 +29,7 @@ public class CreateNewAccount extends Fragment {
 
     ICreateNewAccountListener mListener;
     FirebaseAuth mAuth;
+    FirebaseFirestore db;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,18 +56,36 @@ public class CreateNewAccount extends Fragment {
                         if(isEmailValid(email.getText().toString())){
                             if(!password.getText().toString().equals("")){
                                 mAuth = FirebaseAuth.getInstance();
+                                db = FirebaseFirestore.getInstance();
                                 mAuth.createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
                                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                 if(task.isSuccessful()){
-                                                    mListener.createdAccountStatus(true);
 
+                                                    HashMap<String,Object> user = new HashMap<>();
+                                                    user.put("Email",mAuth.getCurrentUser().getEmail());
+                                                    user.put("Name",name.getText().toString());
+
+                                                    db.collection("Users")
+                                                            .add(user)
+                                                            .addOnCompleteListener(getActivity(), new OnCompleteListener<DocumentReference>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                                    if(task.isSuccessful()){
+                                                                        mListener.createdAccountStatus(true);
+                                                                        Toast.makeText(getContext(), getResources().getString(R.string.success), Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                }
+                                                            });
                                                 } else {
                                                     Toast.makeText(getContext(), getResources().getString(R.string.someThing), Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
+
+
+
 
                             } else {
                                 Toast.makeText(getContext(), getResources().getString(R.string.emptyPass), Toast.LENGTH_SHORT).show();

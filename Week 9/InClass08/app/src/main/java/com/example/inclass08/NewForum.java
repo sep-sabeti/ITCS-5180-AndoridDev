@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +14,25 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NewForum extends Fragment {
 
 
     public FirebaseAuth mAuth;
+    public FirebaseFirestore db;
+    String name;
 
     INewForumListner mListener;
 
@@ -51,32 +59,54 @@ public class NewForum extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String titleString = title.getText().toString();
-                String desString = description.getText().toString();
+                final String titleString = title.getText().toString();
+                final String desString = description.getText().toString();
 
                 if(!titleString.equals("")){
                     if(!desString.equals("")){
 
-                        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-                        HashMap<String,Object> forum = new HashMap<>();
                         mAuth = FirebaseAuth.getInstance();
 
-
-
-                        forum.put("Date",new Timestamp(new java.util.Date()));
-                        forum.put("Description",desString);
-                        forum.put("Name",titleString);
-                        forum.put("Owner","Sep");
-                        forum.put("Owner Email",mAuth.getCurrentUser().getEmail()) ;
-
-                        db.collection("Forums")
-                                .add(forum)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        db = FirebaseFirestore.getInstance();
+                        db.collection("Users")
+                                .get()
+                                .addOnCompleteListener(getActivity(), new OnCompleteListener<QuerySnapshot>() {
                                     @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        mListener.newForumSubmit(true);
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                                        for (QueryDocumentSnapshot doc: task.getResult()
+                                             ) {
+                                            String docEmail  = doc.getData().get("Email").toString();
+
+                                            String docName = doc.getData().get("Name").toString();
+                                            Log.d("TAG", "hey "+docEmail);
+                                            Log.d("TAG", "hey "+mAuth.getCurrentUser().getEmail());
+
+                                            if(docEmail.equals(mAuth.getCurrentUser().getEmail())){
+                                                name = docName;
+                                                HashMap<String,Object> forum = new HashMap<>();
+                                                forum.put("Date",new Timestamp(new java.util.Date()));
+                                                forum.put("Description",desString);
+                                                forum.put("Title ",titleString);
+                                                forum.put("Owner", name);
+                                                forum.put("Owner Email",mAuth.getCurrentUser().getEmail()) ;
+                                                forum.put("Liked",new ArrayList<String>());
+                                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                                                db.collection("Forums")
+                                                        .add(forum)
+                                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                            @Override
+                                                            public void onSuccess(DocumentReference documentReference) {
+                                                                mListener.newForumSubmit(true);
+                                                            }
+                                                        });
+
+                                            }
+                                        }
+
                                     }
                                 });
 
@@ -89,8 +119,6 @@ public class NewForum extends Fragment {
                 }
             }
         });
-
-
 
         return view;
     }
