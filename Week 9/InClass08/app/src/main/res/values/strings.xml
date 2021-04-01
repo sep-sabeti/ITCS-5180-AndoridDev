@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">InClass08</string>
+    <string name="email">Email</string>
+    <string name="pass">Password</string>
+    <string name="login">Login</string>
+    <string name="create">Create New Account</string>
+    <string name="name">Name</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="logOut">Logout</string>
+    <string name="newForum">New Forum</string>
+    <string name="title">Forum Title</string>
+    <string name="desc">Forum Description</string>
+    <string name="forums">Forums</string>
+
+    //Toasts
+    <string name="emptyEmail">Please Enter your Email</string>
+    <string name="emptyPass">Please Enter your Password</string>
+    <string name="emptyName">Please Enter your Name</string>
+    <string name="someThing">Something went wrong, please try again !</string>
+    <string name="sinup">Please sign up first !</string>
+    <string name="validEmail">Please Enter a Valid Email</string>
+    <string name="emptyTitle">Please enter a title</string>
+    <string name="emptyDes">Please enter some description</string>
+
 </resources>
