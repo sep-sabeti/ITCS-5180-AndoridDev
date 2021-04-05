@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class NewForum extends Fragment {
 
@@ -66,9 +67,7 @@ public class NewForum extends Fragment {
                     if(!desString.equals("")){
 
 
-
                         mAuth = FirebaseAuth.getInstance();
-
                         db = FirebaseFirestore.getInstance();
                         db.collection("Users")
                                 .get()
@@ -93,8 +92,8 @@ public class NewForum extends Fragment {
                                                 forum.put("Owner", name);
                                                 forum.put("Owner Email",mAuth.getCurrentUser().getEmail()) ;
                                                 forum.put("Liked",new ArrayList<String>());
+                                                forum.put("Comments",new ArrayList<Map<String,Object>>());
                                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-
                                                 db.collection("Forums")
                                                         .add(forum)
                                                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -103,7 +102,6 @@ public class NewForum extends Fragment {
                                                                 mListener.newForumSubmit(true);
                                                             }
                                                         });
-
                                             }
                                         }
 

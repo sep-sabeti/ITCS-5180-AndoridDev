@@ -60,6 +60,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CardHolder> {
 
         }
 
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.ctx.itemClicked(forums.get(position));
+            }
+        });
+
+
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,10 +181,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CardHolder> {
                 }
             });
 
-
-
-
-
     }
 
     @Override
@@ -202,5 +208,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CardHolder> {
 
     public interface ICardHolderListener {
         void deleteClicked(Forum forum);
+        void itemClicked(Forum forum);
     }
 }

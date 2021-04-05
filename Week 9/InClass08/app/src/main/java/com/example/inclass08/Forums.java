@@ -16,10 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,19 +23,15 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
-
-import static android.provider.Settings.NameValueTable.VALUE;
+import java.util.Map;
 
 public class Forums extends Fragment implements Adapter.ICardHolderListener {
 
-
-    private static final String NAME = "name";
+    private static final String ARG_PARAM1 = "param1";
     private String name;
     public ArrayList<Forum> forums = new ArrayList<>();
     public FirebaseAuth mAuth;
@@ -49,6 +41,30 @@ public class Forums extends Fragment implements Adapter.ICardHolderListener {
     RecyclerView recyclerView;
     FirebaseFirestore db;
 
+    // TODO: Rename and change types of parameters
+    private CurrentUser user;
+
+    public Forums() {
+        // Required empty public constructor
+    }
+
+    public static Forums newInstance(CurrentUser user) {
+        Forums fragment = new Forums();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_PARAM1, user);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            user = (CurrentUser) getArguments().getSerializable(ARG_PARAM1);
+        }
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,7 +73,6 @@ public class Forums extends Fragment implements Adapter.ICardHolderListener {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         getActivity().setTitle(R.string.forums);
-        Log.d("hey2", "onCreateView: " + name);
         Button logOut = view.findViewById(R.id.logout);
         Button newForum = view.findViewById(R.id.newForumButton);
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -83,9 +98,8 @@ public class Forums extends Fragment implements Adapter.ICardHolderListener {
         ctx = this;
         adapter = new Adapter(forums ,  ctx);
         recyclerView.setAdapter(adapter);
-        getUsers();
+        name = user.name;
         getData();
-
         return view;
     }
 
@@ -112,11 +126,19 @@ public class Forums extends Fragment implements Adapter.ICardHolderListener {
 
     }
 
+    @Override
+    public void itemClicked(Forum forum) {
+        if(forum.id != null){
+            mListner.forumClicked(forum);
+        }
+
+    }
 
 
     public interface IForumsListner{
         void logOutClicked(boolean status);
         void newForomClicked(boolean status);
+        void forumClicked(Forum forum);
     }
 
 
@@ -130,6 +152,15 @@ public class Forums extends Fragment implements Adapter.ICardHolderListener {
                         ) {
                             try{
                                 Forum forum1 = new Forum(forum.getData().get("Title ").toString(),forum.getData().get("Owner").toString(),forum.getData().get("Description").toString(), forum.getId() ,forum.getData().get("Owner Email").toString(),getDate(forum.getTimestamp("Date").getSeconds()));
+                                try{
+                                    forum1.setComments((ArrayList<Comment>) forum.getData().get("Comments"));
+                                    Log.d("TAG", "onEvent: "+forum.getData().get("Comments"));
+                                } catch (java.lang.ClassCastException e){
+                                    Log.d("TAG", "onEvent: "+"No");
+
+                                    forum1.setComments();
+                                }
+                                forum1.setLiked((ArrayList<String>) forum.getData().get("Liked"));
                                 forums.add(forum1);
                             } catch (NullPointerException e){
                             }
@@ -138,29 +169,5 @@ public class Forums extends Fragment implements Adapter.ICardHolderListener {
                     }
                 });
     }
-
-
-
-    public void getUsers(){
-        db.collection("Users")
-                .get()
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for (QueryDocumentSnapshot document:task.getResult()
-                            ) {
-                                String documentEmail = document.getData().get("Email").toString();
-                                String documentName = document.getData().get("Name").toString();
-                                if(documentEmail.equals(mAuth.getCurrentUser().getEmail())){
-                                    name = documentName;
-                                }
-                            }
-                        }
-                    }
-                });
-
-    }
-
 
 }

@@ -9,15 +9,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements Login.ILoginListener, CreateNewAccount.ICreateNewAccountListener, Forums.IForumsListner , NewForum.INewForumListner {
 
-    public String TAG = "App";
-
+    public static String TAG = "App";
+    public CurrentUser user = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         if(FirebaseAuth.getInstance().getUid() ==  null || FirebaseAuth.getInstance().getCurrentUser() == null){
             setTitle(R.string.login);
@@ -25,19 +23,21 @@ public class MainActivity extends AppCompatActivity implements Login.ILoginListe
                     .add(R.id.container,new Login())
                     .commit();
         } else {
-            setTitle(R.string.forums);
+            FirebaseAuth.getInstance().signOut();
+            setTitle(R.string.login);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container,new Forums())
+                    .add(R.id.container,new Login())
                     .commit();
         }
     }
 
     @Override
-    public void loginClicked(boolean status) {
-        if(status){
+    public void loginClicked(CurrentUser user) {
+        if(user != null){
+            this.user = user;
             setTitle(R.string.forums);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new Forums())
+                    .replace(R.id.container, Forums.newInstance(user))
                     .commit();
         }
 
@@ -55,15 +55,12 @@ public class MainActivity extends AppCompatActivity implements Login.ILoginListe
     }
 
     @Override
-    public void createdAccountStatus(boolean status) {
-        if(status){
+    public void createdAccountStatus(CurrentUser user) {
+        this.user = user;
             setTitle(R.string.forums);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container,new Forums())
-                    .addToBackStack(null)
+                    .replace(R.id.container, Forums.newInstance(user))
                     .commit();
-
-        }
 
     }
 
@@ -84,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements Login.ILoginListe
     public void logOutClicked(boolean status) {
         if(status){
             setTitle(R.string.login);
+            this.user = null;
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container,new Login())
                     .commit();
@@ -101,11 +99,22 @@ public class MainActivity extends AppCompatActivity implements Login.ILoginListe
     }
 
     @Override
+    public void forumClicked(Forum forum) {
+        if(forum != null){
+            setTitle(getResources().getString(R.string.forum));
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, ForumDescription.newInstance(forum , this.user))
+                    .addToBackStack(null)
+                    .commit();
+        }
+    }
+
+    @Override
     public void newForumSubmit(boolean status) {
         if(status){
             setTitle(R.string.forums);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container,new Forums())
+                    .replace(R.id.container, Forums.newInstance(user))
                     .commit();
         }
 
@@ -117,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements Login.ILoginListe
             if(status){
                 setTitle(R.string.forums);
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container,new Forums())
+                        .replace(R.id.container, Forums.newInstance(user))
                         .commit();
             }
         }

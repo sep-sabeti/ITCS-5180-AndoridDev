@@ -73,7 +73,8 @@ public class CreateNewAccount extends Fragment {
                                                                 @Override
                                                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                                                     if(task.isSuccessful()){
-                                                                        mListener.createdAccountStatus(true);
+                                                                        CurrentUser user1 = new CurrentUser(name.getText().toString(),email.getText().toString());
+                                                                        mListener.createdAccountStatus(user1);
                                                                         Toast.makeText(getContext(), getResources().getString(R.string.success), Toast.LENGTH_SHORT).show();
                                                                     }
                                                                 }
@@ -133,7 +134,7 @@ public class CreateNewAccount extends Fragment {
 
     public interface ICreateNewAccountListener {
 
-        void createdAccountStatus(boolean status);
+        void createdAccountStatus(CurrentUser user);
         void cancelCreatedClicked(boolean status);
     }
 }

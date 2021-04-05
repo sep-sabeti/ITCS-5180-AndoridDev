@@ -1,13 +1,37 @@
 package com.example.inclass08;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Forum {
+public class Forum implements Serializable {
 
     String title,owner,description , id , ownerEmail , date;
     ArrayList<String> liked;
+    ArrayList<Comment>comments;
+
+    public ArrayList<String> getLiked() {
+        return liked;
+    }
+
+    public void setLiked(ArrayList<String> liked) {
+        this.liked = liked;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(){
+        this.comments = new ArrayList<>();
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Forum(){
 
@@ -20,8 +44,8 @@ public class Forum {
         this.id = id;
         this.ownerEmail = ownerEmail;
         this.date = date;
-        this.liked = new ArrayList<>();
     }
+
 
     public String getOwnerEmail() {
         return ownerEmail;

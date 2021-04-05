@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 
 public class Login extends Fragment {
@@ -69,7 +72,7 @@ public class Login extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if(task.isSuccessful()){
-                                                mListener.loginClicked(true);
+                                            getCurrentUser();
                                         }
                                         else {
                                             Toast.makeText(getContext(), getResources().getString(R.string.someThing), Toast.LENGTH_SHORT).show();
@@ -101,9 +104,30 @@ public class Login extends Fragment {
         }
     }
 
+    public void getCurrentUser(){
+        db.collection("Users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+                                if(documentSnapshot.getData().get("Email").equals(mAuth.getCurrentUser().getEmail())){
+                                    CurrentUser user = new CurrentUser(documentSnapshot.getData().get("Name").toString(),documentSnapshot.getData().get("Email").toString());
+                                    Log.d(MainActivity.TAG, "onComplete: ");
+                                    mListener.loginClicked(user);
+
+                                }
+                            }
+
+                        }
+                    }
+                });
+    }
+
     public interface ILoginListener {
         
-        void loginClicked(boolean status);
+        void loginClicked(CurrentUser user);
         void createNewAccountClicked(boolean status);
         
     }
