@@ -21,8 +21,15 @@ public class MainActivity extends AppCompatActivity implements AddCourse.IAddACo
         setContentView(R.layout.activity_main);
 
 
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().show();
 
-        setTitle(R.string.courses);
+        getSupportActionBar().setTitle("Course");
+
+//        setTitle(R.string.courses);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container , new GradeFragment())
                 .commit();
@@ -30,9 +37,18 @@ public class MainActivity extends AppCompatActivity implements AddCourse.IAddACo
 
     }
 
+
     @Override
     public void submitClicked(boolean status) {
-        setTitle(R.string.courses);
+//        setTitle(R.string.courses);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().show();
+
+
+        getSupportActionBar().setTitle("Course");
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container,new GradeFragment())
                 .commit();
@@ -41,7 +57,15 @@ public class MainActivity extends AppCompatActivity implements AddCourse.IAddACo
 
     @Override
     public void cancelClicked(boolean status) {
-        setTitle(R.string.courses);
+//        setTitle(R.string.courses);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().show();
+
+
+        getSupportActionBar().setTitle("Course");
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container,new GradeFragment())
                 .commit();
@@ -50,6 +74,14 @@ public class MainActivity extends AppCompatActivity implements AddCourse.IAddACo
     @Override
     public void addCourseClicked(boolean status) {
         if(status){
+            androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+//            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            getSupportActionBar().hide();
+
+
+            getSupportActionBar().setTitle("Course");
             setTitle(R.string.addCourse);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container,new AddCourse())
@@ -60,7 +92,16 @@ public class MainActivity extends AppCompatActivity implements AddCourse.IAddACo
     @Override
     public void deleteClicked(boolean status) {
         if(status){
-            setTitle(R.string.courses);
+//            setTitle(R.string.courses);
+            androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().show();
+
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+            getSupportActionBar().setTitle("Course");
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container,new GradeFragment())
                     .commit();
